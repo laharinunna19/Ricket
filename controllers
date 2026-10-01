@@ -1,0 +1,43 @@
+function startGame(req, res) {
+
+    const {
+        playerName,
+        language,
+        team,
+        difficulty
+    } = req.body;
+
+
+    if (
+        !playerName ||
+        !language ||
+        !team ||
+        !difficulty
+    ) {
+
+        return res.status(400).json({
+            error: "All game details are required."
+        });
+
+    }
+
+
+    res.json({
+        success: true,
+
+        game: {
+            playerName,
+            language,
+            team,
+            difficulty,
+            overs: 3,
+            ballsPerOver: 6
+        }
+    });
+
+}
+
+
+module.exports = {
+    startGame
+};
