@@ -1,0 +1,62 @@
+function calculateRuns(
+    passed,
+    total,
+    timedOut = false
+) {
+
+    if (timedOut) {
+
+        return {
+            runs: 0,
+            wicket: true
+        };
+
+    }
+
+
+    if (total === 0) {
+
+        return {
+            runs: 0,
+            wicket: false
+        };
+
+    }
+
+
+    const percentage =
+        (passed / total) * 100;
+
+
+    let runs = 0;
+
+
+    if (percentage === 100) {
+
+        runs = 6;
+
+    } else if (percentage >= 70) {
+
+        runs = 4;
+
+    } else if (percentage >= 40) {
+
+        runs = 2;
+
+    } else {
+
+        runs = 0;
+
+    }
+
+
+    return {
+        runs,
+        wicket: false
+    };
+}
+
+
+module.exports = {
+    calculateRuns
+};
