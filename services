@@ -1,0 +1,86 @@
+const fs = require("fs");
+const path = require("path");
+
+
+function getQuestion(language, difficulty) {
+
+    const filePath =
+        path.join(
+            __dirname,
+            "../../questions",
+            language,
+            `${difficulty}.json`
+        );
+
+
+    if (!fs.existsSync(filePath)) {
+        return null;
+    }
+
+
+    const file =
+        fs.readFileSync(
+            filePath,
+            "utf8"
+        );
+
+
+    const questions =
+        JSON.parse(file);
+
+
+    if (!questions.length) {
+        return null;
+    }
+
+
+    const index =
+        Math.floor(
+            Math.random() * questions.length
+        );
+
+
+    return questions[index];
+}
+
+
+function findQuestion(
+    language,
+    difficulty,
+    questionId
+) {
+
+    const filePath =
+        path.join(
+            __dirname,
+            "../../questions",
+            language,
+            `${difficulty}.json`
+        );
+
+
+    if (!fs.existsSync(filePath)) {
+        return null;
+    }
+
+
+    const questions =
+        JSON.parse(
+            fs.readFileSync(
+                filePath,
+                "utf8"
+            )
+        );
+
+
+    return questions.find(
+        question =>
+            question.id === questionId
+    );
+}
+
+
+module.exports = {
+    getQuestion,
+    findQuestion
+};
