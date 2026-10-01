@@ -1,0 +1,65 @@
+[
+    {
+        "id": "PY-E-001",
+        "title": "Reverse a String",
+        "description": "Read a string and print its reverse.",
+        "inputFormat": "A single string.",
+        "outputFormat": "Print the reversed string.",
+        "sampleInput": "hello",
+        "sampleOutput": "olleh",
+
+        "visibleTestCases": [
+            {
+                "input": "hello",
+                "output": "olleh"
+            }
+        ],
+
+        "hiddenTestCases": [
+            {
+                "input": "world",
+                "output": "dlrow"
+            },
+            {
+                "input": "cricket",
+                "output": "tekcirc"
+            },
+            {
+                "input": "python",
+                "output": "nohtyp"
+            }
+        ]
+    },
+
+    {
+        "id": "PY-E-002",
+        "title": "Even or Odd",
+        "description": "Read an integer and print Even if it is divisible by 2, otherwise print Odd.",
+        "inputFormat": "A single integer.",
+        "outputFormat": "Print Even or Odd.",
+        "sampleInput": "7",
+        "sampleOutput": "Odd",
+
+        "visibleTestCases": [
+            {
+                "input": "7",
+                "output": "Odd"
+            }
+        ],
+
+        "hiddenTestCases": [
+            {
+                "input": "2",
+                "output": "Even"
+            },
+            {
+                "input": "10",
+                "output": "Even"
+            },
+            {
+                "input": "13",
+                "output": "Odd"
+            }
+        ]
+    }
+]
