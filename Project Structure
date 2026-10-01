@@ -1,0 +1,56 @@
+RICKET/
+│
+├── index.html
+├── style.css
+├── script.js
+├── README.md
+├── .gitignore
+│
+├── questions/
+│   ├── python/
+│   │   ├── easy.json
+│   │   ├── medium.json
+│   │   └── hard.json
+│   │
+│   ├── javascript/
+│   │   ├── easy.json
+│   │   ├── medium.json
+│   │   └── hard.json
+│   │
+│   ├── java/
+│   │   ├── easy.json
+│   │   ├── medium.json
+│   │   └── hard.json
+│   │
+│   └── cpp/
+│       ├── easy.json
+│       ├── medium.json
+│       └── hard.json
+│
+└── backend/
+    ├── server.js
+    ├── package.json
+    ├── .env.example
+    │
+    ├── routes/
+    │   ├── questionRoutes.js
+    │   ├── submissionRoutes.js
+    │   └── gameRoutes.js
+    │
+    ├── controllers/
+    │   ├── questionController.js
+    │   ├── submissionController.js
+    │   └── gameController.js
+    │
+    ├── services/
+    │   ├── questionService.js
+    │   ├── judgeService.js
+    │   └── scoringService.js
+    │
+    ├── execution/
+    │   └── dockerExecutor.js
+    │
+    └── utils/
+        ├── testRunner.js
+        ├── outputComparator.js
+        └── security.js
