@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ricket - Play Cricket, Learn Coding</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HOME -->
+    <section id="homeScreen" class="screen active">
+        <div class="hero">
+            <div class="logo">🏏 RICKET</div>
+
+            <h1>Play Cricket.<br>Learn Coding.</h1>
+
+            <p>
+                Solve coding problems, score runs and become
+                the Coding Champion!
+            </p>
+
+            <button id="startBtn" class="primary-btn">
+                START MATCH
+            </button>
+        </div>
+    </section>
+
+
+    <!-- SETUP -->
+    <section id="setupScreen" class="screen">
+
+        <div class="setup-container">
+
+            <h2>🏏 Match Setup</h2>
+
+            <label>Player Name</label>
+            <input
+                type="text"
+                id="playerName"
+                placeholder="Enter your name"
+            >
+
+            <h3>Select Programming Language</h3>
+
+            <div class="selection-grid" id="languageSelection">
+
+                <button data-language="python">
+                    🐍 Python
+                </button>
+
+                <button data-language="javascript">
+                    🟨 JavaScript
+                </button>
+
+                <button data-language="java">
+                    ☕ Java
+                </button>
+
+                <button data-language="cpp">
+                    ⚙️ C++
+                </button>
+
+            </div>
+
+
+            <h3>Select Team</h3>
+
+            <div class="selection-grid" id="teamSelection">
+
+                <button data-team="CSK">🦁 CSK</button>
+                <button data-team="MI">🔵 MI</button>
+                <button data-team="RCB">🔴 RCB</button>
+                <button data-team="SRH">🧡 SRH</button>
+                <button data-team="KKR">🟣 KKR</button>
+                <button data-team="DC">🔵 DC</button>
+                <button data-team="RR">💗 RR</button>
+                <button data-team="GT">🔷 GT</button>
+                <button data-team="LSG">🔵 LSG</button>
+                <button data-team="PBKS">🔴 PBKS</button>
+
+            </div>
+
+
+            <h3>Select Difficulty</h3>
+
+            <div class="difficulty-grid" id="difficultySelection">
+
+                <button data-difficulty="easy">
+                    🟢 Easy
+                </button>
+
+                <button data-difficulty="medium">
+                    🟡 Medium
+                </button>
+
+                <button data-difficulty="hard">
+                    🔴 Hard
+                </button>
+
+            </div>
+
+
+            <button id="beginMatchBtn" class="primary-btn">
+                🏏 BEGIN MATCH
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- MATCH -->
+    <section id="matchScreen" class="screen">
+
+        <header class="scoreboard">
+
+            <div>
+                <span>TEAM</span>
+                <strong id="teamName">RCB</strong>
+            </div>
+
+            <div>
+                <span>SCORE</span>
+                <strong id="score">0/0</strong>
+            </div>
+
+            <div>
+                <span>OVER</span>
+                <strong id="overNumber">1.0</strong>
+            </div>
+
+            <div>
+                <span>BALL</span>
+                <strong id="ballNumber">1</strong>
+            </div>
+
+            <div>
+                <span>TIME</span>
+                <strong id="timer">60</strong>
+            </div>
+
+        </header>
+
+
+        <main class="game-container">
+
+            <div class="question-card">
+
+                <div class="question-meta">
+                    <span id="difficultyBadge">Easy</span>
+                    <span id="questionId">PY-E-001</span>
+                </div>
+
+                <h2 id="questionTitle">
+                    Loading question...
+                </h2>
+
+                <p id="questionDescription"></p>
+
+                <div class="io-box">
+
+                    <div>
+                        <strong>Input</strong>
+                        <pre id="inputFormat"></pre>
+                    </div>
+
+                    <div>
+                        <strong>Output</strong>
+                        <pre id="outputFormat"></pre>
+                    </div>
+
+                </div>
+
+                <div class="sample-box">
+
+                    <h4>Sample Input</h4>
+                    <pre id="sampleInput"></pre>
+
+                    <h4>Sample Output</h4>
+                    <pre id="sampleOutput"></pre>
+
+                </div>
+
+            </div>
+
+
+            <div class="editor-card">
+
+                <div class="editor-header">
+
+                    <span id="editorLanguage">
+                        Python
+                    </span>
+
+                    <button id="submitCodeBtn">
+                        ▶ RUN CODE
+                    </button>
+
+                </div>
+
+                <textarea
+                    id="codeEditor"
+                    spellcheck="false"
+                    placeholder="Write your code here..."
+                ></textarea>
+
+            </div>
+
+
+            <div id="resultPanel" class="result-panel hidden">
+
+                <h3 id="resultTitle">
+                    Result
+                </h3>
+
+                <div id="testResult"></div>
+
+                <div class="result-score">
+                    <span>Runs</span>
+                    <strong id="ballRuns">0</strong>
+                </div>
+
+                <button id="nextBallBtn" class="primary-btn">
+                    NEXT BALL →
+                </button>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- RESULT -->
+    <section id="resultScreen" class="screen">
+
+        <div class="match-result">
+
+            <div class="trophy">🏆</div>
+
+            <h1>MATCH OVER</h1>
+
+            <h2 id="finalPlayerName">
+                Player
+            </h2>
+
+            <div class="final-score">
+                <strong id="finalScore">
+                    0/0
+                </strong>
+
+                <span>
+                    in 3 overs
+                </span>
+            </div>
+
+            <div class="stats">
+
+                <div>
+                    <span>Runs</span>
+                    <strong id="finalRuns">0</strong>
+                </div>
+
+                <div>
+                    <span>Wickets</span>
+                    <strong id="finalWickets">0</strong>
+                </div>
+
+                <div>
+                    <span>Questions</span>
+                    <strong id="finalQuestions">0</strong>
+                </div>
+
+            </div>
+
+            <button
+                id="playAgainBtn"
+                class="primary-btn"
+            >
+                PLAY AGAIN
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
