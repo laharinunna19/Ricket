@@ -1,0 +1,29 @@
+[
+    {
+        "id": "CPP-E-001",
+        "title": "Sum of Two Numbers",
+        "description": "Read two integers and print their sum.",
+        "inputFormat": "Two integers separated by space.",
+        "outputFormat": "Print their sum.",
+        "sampleInput": "10 20",
+        "sampleOutput": "30",
+
+        "visibleTestCases": [
+            {
+                "input": "10 20",
+                "output": "30"
+            }
+        ],
+
+        "hiddenTestCases": [
+            {
+                "input": "2 3",
+                "output": "5"
+            },
+            {
+                "input": "100 200",
+                "output": "300"
+            }
+        ]
+    }
+]
