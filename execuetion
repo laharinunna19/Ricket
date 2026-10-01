@@ -1,0 +1,206 @@
+const { execFile } = require("child_process");
+const fs = require("fs");
+const os = require("os");
+const path = require("path");
+const crypto = require("crypto");
+
+
+const LANGUAGE_CONFIG = {
+
+    python: {
+        image: "python:3.12-alpine",
+        filename: "main.py",
+        command: [
+            "python",
+            "/app/main.py"
+        ]
+    },
+
+    javascript: {
+        image: "node:22-alpine",
+        filename: "main.js",
+        command: [
+            "node",
+            "/app/main.js"
+        ]
+    },
+
+    java: {
+        image: "eclipse-temurin:21-jdk-alpine",
+        filename: "Main.java",
+        command: [
+            "sh",
+            "-c",
+            "javac /app/Main.java && java -cp /app Main"
+        ]
+    },
+
+    cpp: {
+        image: "gcc:14",
+        filename: "main.cpp",
+        command: [
+            "sh",
+            "-c",
+            "g++ /app/main.cpp -O2 -o /tmp/main && /tmp/main"
+        ]
+    }
+
+};
+
+
+function executeCode(
+    language,
+    code,
+    input
+) {
+
+    return new Promise((resolve, reject) => {
+
+        const config =
+            LANGUAGE_CONFIG[language];
+
+
+        if (!config) {
+
+            reject(
+                new Error(
+                    "Unsupported language."
+                )
+            );
+
+            return;
+        }
+
+
+        const id =
+            crypto
+                .randomBytes(8)
+                .toString("hex");
+
+
+        const tempDir =
+            fs.mkdtempSync(
+                path.join(
+                    os.tmpdir(),
+                    `ricket-${id}-`
+                )
+            );
+
+
+        const sourceFile =
+            path.join(
+                tempDir,
+                config.filename
+            );
+
+
+        fs.writeFileSync(
+            sourceFile,
+            code,
+            "utf8"
+        );
+
+
+        const args = [
+
+            "run",
+            "--rm",
+
+            "--network",
+            "none",
+
+            "--memory",
+            "128m",
+
+            "--cpus",
+            "0.5",
+
+            "--pids-limit",
+            "64",
+
+            "--read-only",
+
+            "-v",
+            `${tempDir}:/app:ro`,
+
+            config.image,
+
+            ...config.command
+
+        ];
+
+
+        const child =
+            execFile(
+                "docker",
+                args,
+                {
+                    timeout: 2500,
+                    maxBuffer: 1024 * 1024
+                },
+                (error, stdout, stderr) => {
+
+                    try {
+                        fs.rmSync(
+                            tempDir,
+                            {
+                                recursive: true,
+                                force: true
+                            }
+                        );
+                    } catch (_) {}
+
+
+                    if (error) {
+
+                        if (
+                            error.killed ||
+                            error.code === "ETIMEDOUT"
+                        ) {
+
+                            resolve({
+                                output: "",
+                                timedOut: true
+                            });
+
+                            return;
+                        }
+
+
+                        resolve({
+                            output: "",
+                            stderr,
+                            runtimeError: true
+                        });
+
+                        return;
+                    }
+
+
+                    resolve({
+                        output: stdout,
+                        stderr,
+                        timedOut: false
+                    });
+
+                }
+            );
+
+
+        /*
+         * Send test-case input to the program.
+         */
+        child.stdin.write(
+            String(input)
+        );
+
+        child.stdin.end();
+
+    });
+
+}
+
+
+module.exports = {
+    executeCode
+};
